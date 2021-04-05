@@ -15,5 +15,9 @@ export class ConnexionComponent implements OnInit {
     this.user=new Utilisateur();
   }
   connexion()
-  {}
+  {
+
+    
+  }
+
 }
