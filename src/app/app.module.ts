@@ -6,6 +6,13 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 
+//firebase
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from '../environments/environment';
+
+
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 
@@ -24,6 +31,10 @@ import { InscriptionComponent } from './inscription/inscription.component';
     RouterModule,
     AppRoutingModule,
     NgbModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFirestoreModule,
+    AngularFireDatabaseModule,
     ToastrModule.forRoot()
   ],
   declarations: [
