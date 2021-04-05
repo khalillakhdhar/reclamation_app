@@ -28,12 +28,12 @@
             </div>
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
-              <input type="password" #mdp="ngModel" required [(ngModel)]="user.mdp" class="form-control" id="exampleInputPassword1">
+              <input type="password" #mdp="ngModel" required [(ngModel)]="user.mdp" class="form-control" name="pass" id="exampleInputPassword1">
             </div>
             
            <span class="centered"> <button [disabled]="myForm.invalid"  type="submit" class="btn btn-primary">S'inscrire</button></span>
            <br>
-           <span class="centered"><a routerLink="inscription">Inscription</a> </span>
+           <span class="centered"><a href="./connexion">Inscription</a> </span>
 
           </form> 
           <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="alert alert-danger">
