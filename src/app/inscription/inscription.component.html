@@ -4,38 +4,88 @@
       </div>
       <div class="col-sm">
 
-        <form>
+        <form #myForm="ngForm">
             <span class="centered"><h2>Connexion</h2> </span>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Nom</label>
-              <input type="text" name="nom" class="form-control" id="exampleInputEmail1" >
+              <input type="text" #nom="ngModel" required pattern="[A-Za-z éè]{3,30}" [(ngModel)]="user.nom" name="nom" class="form-control" id="exampleInputEmail1" >
             </div>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Prenom</label>
-              <input type="text" name="prenom" class="form-control" id="exampleInputEmail1" >
+              <input type="text" #prenom="ngModel" required pattern="[A-Za-z éè]{3,30}" [(ngModel)]="user.prenom" name="prenom" class="form-control" id="exampleInputEmail1" >
             </div>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Cin</label>
-              <input type="text" name="cin" class="form-control" id="exampleInputEmail1" >
+              <input type="text" #cin="ngModel" required pattern="[0-9]{8}" name="cin" [(ngModel)]="user.cin" class="form-control" id="exampleInputEmail1" >
             </div>
             <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">zonne</label>
-              <input type="text" name="zone" class="form-control" id="exampleInputEmail1" >
+              <label for="exampleInputEmail1" class="form-label">zone</label>
+              <input type="text" #zone="ngModel" required name="zone" [(ngModel)]="user.zone" class="form-control" id="exampleInputEmail1" >
             </div>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Login</label>
-              <input type="text" name="login" class="form-control" id="exampleInputEmail1" >
+              <input type="text" #login="ngModel" required [(ngModel)]="user.login" name="login" class="form-control" id="exampleInputEmail1" >
             </div>
             <div class="mb-3">
               <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
-              <input type="password" class="form-control" id="exampleInputPassword1">
+              <input type="password" #mdp="ngModel" required [(ngModel)]="user.mdp" class="form-control" id="exampleInputPassword1">
             </div>
             
-           <span class="centered"> <button type="submit" class="btn btn-primary">Se connecter</button></span>
+           <span class="centered"> <button [disabled]="myForm.invalid"  type="submit" class="btn btn-primary">S'inscrire</button></span>
            <br>
            <span class="centered"><a routerLink="inscription">Inscription</a> </span>
 
-          </form>      </div>
+          </form> 
+          <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="alert alert-danger">
+          <div *ngIf="nom.errors.required">
+          Nom obligatoire.
+          </div>
+          <div *ngIf="nom.errors.pattern">
+          le nom ne peux contenir que des espaces ou des lettres
+          </div>
+        </div>
+          <div *ngIf="prenom.invalid && (prenom.dirty || prenom.touched)" class="alert alert-warning">
+          <div *ngIf="prenom.errors.required">
+          le prenom est obligatoir </div>
+          <div *ngIf="prenom.errors.pattern">
+            le prenom ne peux contenir que des espaces ou des lettres
+            </div>
+          </div>
+          <div *ngIf="cin.invalid && (cin.dirty || cin.touched)" class="alert alert-danger">
+            <div *ngIf="cin.errors.required">
+            Cin obligatoire.
+            </div>
+            <div *ngIf="cin.errors.pattern">
+            vérifiez le numéro de CIN
+            </div>
+          </div>
+          <div *ngIf="zone.invalid && (zone.dirty || zone.touched)" class="alert alert-danger">
+            <div *ngIf="zone.errors.required">
+            la zone est obligatoire.
+            </div>
+            <div *ngIf="zone.errors.pattern">
+            vérifiez la zone
+            </div>
+            </div>
+          <div *ngIf="login.invalid && (login.dirty || login.touched)" class="alert alert-danger">
+            <div *ngIf="login.errors.required">
+            la login est obligatoire.
+            </div>
+            <div *ngIf="login.errors.pattern">
+            vérifiez le login
+            </div>
+          </div>
+          <div *ngIf="mdp.invalid && (mdp.dirty || mdp.touched)" class="alert alert-danger">
+            <div *ngIf="mdp.errors.required">
+            la mot de passe est obligatoire.
+            </div>
+            <div *ngIf="mdp.errors.pattern">
+            vérifiez le mot de passe
+            </div>
+          </div>
+        
+        
+        </div>
       <div class="col-sm">
       </div>
     </div>
