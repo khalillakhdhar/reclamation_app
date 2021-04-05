@@ -4,8 +4,8 @@
       </div>
       <div class="col-sm">
 
-        <form #myForm="ngForm">
-            <span class="centered"><h2>Connexion</h2> </span>
+        <form #myForm="ngForm" (submit)="ajouter()">
+            <span class="centered"><h2>S'inscrire</h2> </span>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Nom</label>
               <input type="text" #nom="ngModel" required pattern="[A-Za-z éè]{3,30}" [(ngModel)]="user.nom" name="nom" class="form-control" id="exampleInputEmail1" >
