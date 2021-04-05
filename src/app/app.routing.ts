@@ -4,13 +4,19 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { ConnexionComponent } from './connexion/connexion.component';
+import { InscriptionComponent } from './inscription/inscription.component';
 
 const routes: Routes =[
   {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
-  }, {
+  }, 
+
+  {path: 'connexion',component:ConnexionComponent},
+  {path: 'connexion/inscription',component:InscriptionComponent},
+  {
     path: '',
     component: AdminLayoutComponent,
     children: [
