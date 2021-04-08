@@ -20,7 +20,7 @@ ajouter()
 let us=Object.assign({},this.user);
 this.userService.create_NewUser(us);
 //alert("ajouté avec succés");
-window.location.replace("connexion");
+//window.location.replace("connexion");
 
 
 }
