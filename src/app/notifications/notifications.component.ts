@@ -4,7 +4,9 @@ import { Reclamation } from '../classes/reclamation';
 import { Utilisateur } from '../classes/utilisateur';
 import { ReclamationService } from '../services/reclamation.service';
 import { UserService } from '../services/user.service';
-
+import { AngularFireStorage } from "@angular/fire/storage";
+import { map, finalize } from "rxjs/operators";
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
@@ -17,8 +19,11 @@ user:Utilisateur;
 users:Utilisateur[];
 id:string;
 grade:string;
+selectedFile: File = null;
+fb = "product";
+downloadURL: Observable<string>;
 
-  constructor(private userService:UserService,private reclamationService:ReclamationService, private toastr: ToastrService) {}
+  constructor(private storage: AngularFireStorage,private userService:UserService,private reclamationService:ReclamationService, private toastr: ToastrService) {}
 
   ngOnInit() {
     this.reclamation=new Reclamation();
@@ -28,6 +33,32 @@ grade:string;
     this.read();
     this.readreclamation();
   }
+  onFileSelected(event) {
+    var n = Date.now();
+    const file = event.target.files[0];
+    const filePath = `/reclamations/${n}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(`/reclamations/${n}`, file);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe((url) => {
+            if (url) {
+              this.fb = url;
+            }
+            console.log(this.fb);
+          });
+        })
+      )
+      .subscribe((url) => {
+        if (url) {
+          console.log(url);
+        }
+      });
+  }
+
   readreclamation()
   {
     this.reclamationService.read_Reclamations().subscribe(data => {
@@ -91,5 +122,16 @@ grade:string;
   
   
   
+  }
+  add()
+  {
+    this.reclamation.photo=this.fb;
+    this.reclamation.date_heure=Date();
+    this.reclamation.etat="attente";
+    this.reclamation.user=this.user.nom+" "+this.user.prenom;
+    this.reclamation.userid=this.user.id;
+    let rec=Object.assign({},this.reclamation);
+    this.reclamationService.create_NewReclamation(rec);
+
   }
 }
