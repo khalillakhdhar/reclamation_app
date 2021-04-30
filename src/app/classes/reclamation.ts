@@ -7,6 +7,7 @@ export class Reclamation {
     etat:string;
     type:string;
     user:string;
+    userid:string;
     
 
 
