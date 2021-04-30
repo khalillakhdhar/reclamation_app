@@ -43,6 +43,7 @@ grade:string;
          etat: e.payload.doc.data()["etat"],
          type: e.payload.doc.data()["type"],
          user: e.payload.doc.data()["user"],
+         userid: e.payload.doc.data()["userid"],
     
     
     
