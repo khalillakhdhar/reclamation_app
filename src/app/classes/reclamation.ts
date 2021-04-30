@@ -6,6 +6,7 @@ export class Reclamation {
     localisation:string;
     etat:string;
     type:string;
+    user:string;
     
 
 
