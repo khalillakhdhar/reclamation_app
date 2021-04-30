@@ -26,6 +26,7 @@ grade:string;
     this.user=new Utilisateur();
     this.id=localStorage.getItem("id");
     this.read();
+    this.readreclamation();
   }
   readreclamation()
   {
@@ -35,18 +36,20 @@ grade:string;
         return {
          id: e.payload.doc.id,
     
-         date_heure: e.payload.doc.data()["nom"],
-         photo: e.payload.doc.data()["prenom"],
-         message: e.payload.doc.data()["cin"],
-         localisation: e.payload.doc.data()["zone"],
-         etat: e.payload.doc.data()["login"],
-         type: e.payload.doc.data()["mdp"],
-         user: e.payload.doc.data()["grade"],
+         date_heure: e.payload.doc.data()["date_heure"],
+         photo: e.payload.doc.data()["photo"],
+         message: e.payload.doc.data()["message"],
+         localisation: e.payload.doc.data()["localisation"],
+         etat: e.payload.doc.data()["etat"],
+         type: e.payload.doc.data()["type"],
+         user: e.payload.doc.data()["user"],
     
     
     
         };
       });
+      console.log("reclamations",this.reclamations);
+
   });
 }
   read()
