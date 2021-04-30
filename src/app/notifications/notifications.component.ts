@@ -132,6 +132,6 @@ downloadURL: Observable<string>;
     this.reclamation.userid=this.user.id;
     let rec=Object.assign({},this.reclamation);
     this.reclamationService.create_NewReclamation(rec);
-
+alert("reclamation ajouté");
   }
 }
