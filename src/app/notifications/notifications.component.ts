@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { Reclamation } from '../classes/reclamation';
+import { Utilisateur } from '../classes/utilisateur';
+import { ReclamationService } from '../services/reclamation.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-notifications',
@@ -7,63 +11,81 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./notifications.component.css']
 })
 export class NotificationsComponent implements OnInit {
+reclamation:Reclamation;
+reclamations:Reclamation[];
+user:Utilisateur;
+users:Utilisateur[];
+id:string;
+grade:string;
 
-  constructor(private toastr: ToastrService) {}
-  showNotification(from, align){
+  constructor(private userService:UserService,private reclamationService:ReclamationService, private toastr: ToastrService) {}
 
-      const color = Math.floor((Math.random() * 5) + 1);
-
-      switch(color){
-        case 1:
-        this.toastr.info('<span class="now-ui-icons ui-1_bell-53"></span> Welcome to <b>Now Ui Dashboard</b> - a beautiful freebie for every web developer.', '', {
-           timeOut: 8000,
-           closeButton: true,
-           enableHtml: true,
-           toastClass: "alert alert-info alert-with-icon",
-           positionClass: 'toast-' + from + '-' +  align
-         });
-        break;
-        case 2:
-        this.toastr.success('<span class="now-ui-icons ui-1_bell-53"></span> Welcome to <b>Now Ui Dashboard</b> - a beautiful freebie for every web developer.', '', {
-           timeOut: 8000,
-           closeButton: true,
-           enableHtml: true,
-           toastClass: "alert alert-success alert-with-icon",
-           positionClass: 'toast-' + from + '-' +  align
-         });
-        break;
-        case 3:
-        this.toastr.warning('<span class="now-ui-icons ui-1_bell-53"></span> Welcome to <b>Now Ui Dashboard</b> - a beautiful freebie for every web developer.', '', {
-           timeOut: 8000,
-           closeButton: true,
-           enableHtml: true,
-           toastClass: "alert alert-warning alert-with-icon",
-           positionClass: 'toast-' + from + '-' +  align
-         });
-        break;
-        case 4:
-        this.toastr.error('<span class="now-ui-icons ui-1_bell-53"></span> Welcome to <b>Now Ui Dashboard</b> - a beautiful freebie for every web developer.', '', {
-           timeOut: 8000,
-           enableHtml: true,
-           closeButton: true,
-           toastClass: "alert alert-danger alert-with-icon",
-           positionClass: 'toast-' + from + '-' +  align
-         });
-         break;
-         case 5:
-         this.toastr.show('<span class="now-ui-icons ui-1_bell-53"></span> Welcome to <b>Now Ui Dashboard</b> - a beautiful freebie for every web developer.', '', {
-            timeOut: 8000,
-            closeButton: true,
-            enableHtml: true,
-            toastClass: "alert alert-primary alert-with-icon",
-            positionClass: 'toast-' + from + '-' +  align
-          });
-        break;
-        default:
-        break;
-      }
-  }
   ngOnInit() {
+    this.reclamation=new Reclamation();
+    this.reclamations=[];
+    this.user=new Utilisateur();
+    this.id=localStorage.getItem("id");
+    this.read();
   }
-
+  readreclamation()
+  {
+    this.reclamationService.read_Reclamations().subscribe(data => {
+  
+      this.reclamations = data.map(e => {
+        return {
+         id: e.payload.doc.id,
+    
+         date_heure: e.payload.doc.data()["nom"],
+         photo: e.payload.doc.data()["prenom"],
+         message: e.payload.doc.data()["cin"],
+         localisation: e.payload.doc.data()["zone"],
+         etat: e.payload.doc.data()["login"],
+         type: e.payload.doc.data()["mdp"],
+         user: e.payload.doc.data()["grade"],
+    
+    
+    
+        };
+      });
+  });
+}
+  read()
+  {
+  this.userService.read_Users().subscribe(data => {
+  
+    this.users = data.map(e => {
+      return {
+       id: e.payload.doc.id,
+  
+       nom: e.payload.doc.data()["nom"],
+       prenom: e.payload.doc.data()["prenom"],
+       cin: e.payload.doc.data()["cin"],
+       zone: e.payload.doc.data()["zone"],
+       login: e.payload.doc.data()["login"],
+       mdp: e.payload.doc.data()["mdp"],
+       grade: e.payload.doc.data()["grade"],
+  
+  
+  
+      };
+    });
+    for (let u of this.users)
+  {
+  if((u.id==this.id))
+  {
+  this.user=u;
+  
+  }
+  console.log("user",this.user);
+  
+  
+  }
+  
+    console.log("liste",this.users);
+  
+  });
+  
+  
+  
+  }
 }
