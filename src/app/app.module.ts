@@ -13,6 +13,13 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 
 
+//storage
+import {
+  AngularFireStorageModule,
+  AngularFireStorageReference,
+  AngularFireUploadTask,
+} from "@angular/fire/storage";
+
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
 
@@ -34,6 +41,7 @@ import { InscriptionComponent } from './inscription/inscription.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFirestoreModule,
+    
     AngularFireDatabaseModule,
     ToastrModule.forRoot()
   ],
