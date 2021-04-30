@@ -20,21 +20,22 @@
           <form>
             <div class="mb-3">
               <label for="localite" class="form-label">Localité ou ville</label>
-              <input type="text" placeholder="choisissez un emplacement" class="form-control" id="localite" aria-describedby="emailHelp">
-            </div>
-            <div class="mb-3">
-              <label for="message" class="form-label">message</label>
-              <textarea placeholder="votre message ici" type="text" class="form-control" id="message"></textarea>
-            </div>
-            <div class="mb-3">
-              <label for="reclamation" class="form-label">Réclamer pour</label>
-              <select  class="form-control"><option value="steg">STEG</option><option value="soned">SONED</option><option value="onas">ONAS</option></select>
+              <input type="text" name="locale" [(ngModel)]="reclamation.localisation" placeholder="choisissez un emplacement" class="form-control" id="localite" aria-describedby="emailHelp">
             </div>
             <div class="mb-3">
               <label for="photo" class="form-label">Photo du cas</label>
-              <input type="file"  class="form-control" id="localite" aria-describedby="emailHelp">
+              <input type="file" name="photo" [(ngModel)]="reclamation.photo"   (change)="onFileSelected($event)" class="form-control" id="localite" aria-describedby="emailHelp">
             </div>
-            <button type="submit" class="btn btn-primary">Réclamer</button>
+            <div class="mb-3">
+              <label for="message" class="form-label">message</label>
+              <textarea name="mdg" [(ngModel)]="reclamation.message" placeholder="votre message ici" type="text" class="form-control" id="message"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="reclamation" class="form-label">Réclamer pour</label>
+              <select name="type" name="type"  [(ngModel)]="reclamation.type" class="form-control"><option value="steg">STEG</option><option value="soned">SONED</option><option value="onas">ONAS</option></select>
+            </div>
+           
+            <button type="submit" (click)="add()" class="btn btn-primary">Réclamer</button>
           </form>
          </div>
         </div>
