@@ -6,7 +6,9 @@
 </div>
 <div class="main-content">
   <div class="row">
-    <div class="col-md-6">
+    <div *ngIf="grade!='admin' ">
+    <div class="col-md-12">
+      
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">Réclamer un probléme</h4>
@@ -41,7 +43,9 @@
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    </div>
+    
+    <div class="col-md-12">
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">Vos réclamations</h4>
@@ -52,34 +56,39 @@
               <i class="now-ui-icons ui-1_simple-remove"></i>
             </button>
             <span>
-              <b> Réclamation- </b> Déclaré de votre part</span>
+              <b> Réclamation- </b> Déclaré de votre part {{id}}</span>
           </div>
           <div class="row">
+           
             <div class="col-md-12">
               <div class="card">
                 <div class="card-header">
-                  <h4 class="card-title"> Liste des utilisateurs</h4>
+                  <h4 class="card-title"> Liste des Réclamations</h4>
                 </div>
                 <div class="card-body">
                   <div class="table-responsive">
                     <table class="table">
                       <thead class=" text-primary">
+                        <tr>
+                        <div>
                         <th>
                           Date
                         </th>
                         <th>
-                          Réclamé par
+                          Photo 
                         </th>
                         <th>
-                          Photo
+                            Réclamé par
                         </th>
                   
-                        <th class="text-right">
+                        <th >
         Action                </th>
+      </div></tr>
                       </thead>
                       <tbody>
                         <tr *ngFor="let re of reclamations">
-                          <td>{{re.date_heure}}                 </td>
+                     
+                          <td>{{re.date_heure |date: 'short'}}                 </td>
                           <td>
                          <img [src]="re.photo" width="150" height="150">
                           </td>
@@ -87,7 +96,7 @@
                             {{re.user}}
                           </td>
                          
-                          <td class="text-right">
+                          <td >
                             <a class="btn btn-danger" (click)="supprimer(re.id)">supprimer</a>
                           </td>
                         </tr>
