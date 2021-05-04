@@ -30,6 +30,7 @@ downloadURL: Observable<string>;
     this.reclamations=[];
     this.user=new Utilisateur();
     this.id=localStorage.getItem("id");
+    this.grade=localStorage.getItem("grade");
     this.read();
     this.readreclamation();
   }
@@ -138,7 +139,7 @@ alert("reclamation ajouté");
   {
     if(confirm("vous êtes sûre de vouloir supprimer ?"))
     {
-      this.reclamationService.delete_Reclamation(id);
+      this.reclamationService.delete_Reclamation(id);   
     }
   }
 }
