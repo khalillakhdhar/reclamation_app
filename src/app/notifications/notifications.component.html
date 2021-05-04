@@ -54,7 +54,52 @@
             <span>
               <b> Réclamation- </b> Déclaré de votre part</span>
           </div>
-       
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  <h4 class="card-title"> Liste des utilisateurs</h4>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead class=" text-primary">
+                        <th>
+                          Date
+                        </th>
+                        <th>
+                          Réclamé par
+                        </th>
+                        <th>
+                          Photo
+                        </th>
+                  
+                        <th class="text-right">
+        Action                </th>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let re of reclamations">
+                          <td>{{re.date_heure}}                 </td>
+                          <td>
+                         <img [src]="re.photo" width="150" height="150">
+                          </td>
+                          <td>
+                            {{re.user}}
+                          </td>
+                         
+                          <td class="text-right">
+                            <a class="btn btn-danger" (click)="supprimer(re.id)">supprimer</a>
+                          </td>
+                        </tr>
+                      
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+          </div>
         
         </div>
       </div>
