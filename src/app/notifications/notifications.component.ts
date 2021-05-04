@@ -134,4 +134,11 @@ downloadURL: Observable<string>;
     this.reclamationService.create_NewReclamation(rec);
 alert("reclamation ajouté");
   }
+  supprimer(id)
+  {
+    if(confirm("vous êtes sûre de vouloir supprimer ?"))
+    {
+      this.reclamationService.delete_Reclamation(id);
+    }
+  }
 }
