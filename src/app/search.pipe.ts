@@ -1,12 +1,20 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'search'
+    name: 'LockFilter'
 })
+
 export class SearchPipe implements PipeTransform {
+    transform(value: any, args?: any): any {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
-  }
+        if (!value) {return null; }
+        if (!args) {return value; }
 
+        args = args.toLowerCase();
+
+        // tslint:disable-next-line: only-arrow-functions
+        return value.filter(function(item) {
+            return JSON.stringify(item).toLowerCase().includes(args);
+        });
+    }
 }
