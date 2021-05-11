@@ -135,6 +135,13 @@ downloadURL: Observable<string>;
     this.reclamationService.create_NewReclamation(rec);
 alert("reclamation ajouté");
   }
+  update(re)
+  {
+    this.reclamation=re;
+    this.reclamation.etat="resolu";
+    let rec=Object.assign({},this.reclamation);
+    this.reclamationService.update_Reclamation(this.reclamation.id,rec);
+  }
   supprimer(id)
   {
     if(confirm("vous êtes sûre de vouloir supprimer ?"))
