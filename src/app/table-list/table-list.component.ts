@@ -9,7 +9,7 @@ import { UserService } from '../services/user.service';
 })
 export class TableListComponent implements OnInit {
   user:Utilisateur;
-
+query:string;
   users:Utilisateur[];
     constructor(private userService:UserService) { }
   
