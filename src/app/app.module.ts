@@ -28,6 +28,7 @@ import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { ConnexionComponent } from './connexion/connexion.component';
 import { InscriptionComponent } from './inscription/inscription.component';
+import { SearchPipe } from './search.pipe';
 
 @NgModule({
   imports: [
@@ -49,7 +50,8 @@ import { InscriptionComponent } from './inscription/inscription.component';
     AppComponent,
     AdminLayoutComponent,
     ConnexionComponent,
-    InscriptionComponent
+    InscriptionComponent,
+    SearchPipe
 
   ],
   providers: [],
