@@ -55,8 +55,8 @@
             <button type="button" aria-hidden="true" class="close">
               <i class="now-ui-icons ui-1_simple-remove"></i>
             </button>
-            <span>
-              <b> Réclamation- </b> Déclaré de votre part {{id}}</span>
+          
+              <b> Réclamation- </b> Déclaré de votre part {{id}}
           </div>
           <div class="row">
            
@@ -70,7 +70,6 @@
                     <table class="table">
                       <thead class=" text-primary">
                         <tr>
-                        <div>
                         <th>
                           Date
                         </th>
@@ -78,12 +77,19 @@
                           Photo 
                         </th>
                         <th>
+                          Localisation 
+                        </th>
+                        
+                        <th>
                             Réclamé par
                         </th>
                   
                         <th >
+                          <th>
+                            Etat 
+                          </th>
         Action                </th>
-      </div></tr>
+      </tr>
                       </thead>
                       <tbody>
                         <tr *ngFor="let re of reclamations">
@@ -93,9 +99,16 @@
                          <img [src]="re.photo" width="150" height="150">
                           </td>
                           <td>
+                            {{re.localisation}}
+                          </td>
+                          
+                          <td>
                             {{re.user}}
                           </td>
                          
+                          <td>
+                            {{re.etat}}
+                          </td>
                           <td >
                             <a class="btn btn-danger" (click)="supprimer(re.id)">supprimer</a>
                           </td>
