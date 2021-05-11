@@ -141,6 +141,7 @@ alert("reclamation ajouté");
     this.reclamation.etat="resolu";
     let rec=Object.assign({},this.reclamation);
     this.reclamationService.update_Reclamation(this.reclamation.id,rec);
+    this.reclamation=new Reclamation();
   }
   supprimer(id)
   {
