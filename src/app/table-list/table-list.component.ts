@@ -9,11 +9,13 @@ import { UserService } from '../services/user.service';
 })
 export class TableListComponent implements OnInit {
   user:Utilisateur;
+
   users:Utilisateur[];
     constructor(private userService:UserService) { }
   
     ngOnInit(): void {
       this.user=new Utilisateur();
+      this.user.grade="citoyen";
       this.read();
     }
 
@@ -44,6 +46,13 @@ export class TableListComponent implements OnInit {
   
   
   
+  }
+  add()
+  {
+    let us=Object.assign({},this.user);
+    this.userService.create_NewUser(us);
+    this.user=new Utilisateur();
+    alert("ajouté");
   }
   supprimer(id)
   {
