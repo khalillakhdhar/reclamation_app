@@ -13,7 +13,6 @@ export const ROUTES: RouteInfo[] = [
     { path: '/reclamation', title: 'Reclamation',  icon:'ui-1_bell-53', class: '' },
 
     { path: '/utilisateurs', title: 'Utilisateurs',  icon:'design_bullet-list-67', class: '' },
-    { path: '/rapports', title: 'Rapport',  icon:'text_caps-small', class: '' },
     { path: '/connexion', title: 'Déconnexion',  icon:'objects_spaceship', class: 'active active-pro' }
 
 ];

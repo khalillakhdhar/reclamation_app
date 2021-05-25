@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/storage';
 import * as Chartist from 'chartist';
+import { ToastrService } from 'ngx-toastr';
+import { Reclamation } from '../classes/reclamation';
+import { ReclamationService } from '../services/reclamation.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,6 +12,9 @@ import * as Chartist from 'chartist';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+  soned=0;
+  onas=0;
+  steg=0;
   public lineBigDashboardChartType;
   public gradientStroke;
   public chartColor;
@@ -57,9 +65,12 @@ export class DashboardComponent implements OnInit {
       return "rgb(" + r + ", " + g + ", " + b + ")";
     }
   }
-  constructor() { }
-
+  constructor(private storage: AngularFireStorage,private userService:UserService,private reclamationService:ReclamationService, private toastr: ToastrService) { }
+  reclamation:Reclamation;
+  reclamations:Reclamation[];
   ngOnInit() {
+    this.readreclamation();
+
     this.chartColor = "#FFFFFF";
     this.canvas = document.getElementById("bigDashboardChart");
     this.ctx = this.canvas.getContext("2d");
@@ -412,4 +423,50 @@ export class DashboardComponent implements OnInit {
 
     this.lineChartGradientsNumbersType = 'bar';
   }
+
+
+  readreclamation()
+  {
+    this.reclamationService.read_Reclamations().subscribe(data => {
+  
+      this.reclamations = data.map(e => {
+        return {
+         id: e.payload.doc.id,
+    
+         date_heure: e.payload.doc.data()["date_heure"],
+         photo: e.payload.doc.data()["photo"],
+         message: e.payload.doc.data()["message"],
+         localisation: e.payload.doc.data()["localisation"],
+         etat: e.payload.doc.data()["etat"],
+         type: e.payload.doc.data()["type"],
+         user: e.payload.doc.data()["user"],
+         userid: e.payload.doc.data()["userid"],
+    
+    
+    
+        };
+        
+      });
+      console.log("reclamations",this.reclamations);
+      for(let rec of this.reclamations)
+      {
+        if(rec.type=="onas")
+        {
+          this.onas++;
+
+        }
+        else if(rec.type=="steg")
+        {
+          this.steg++;
+          
+        }
+        else 
+        {
+          this.soned++;
+          
+        }
+
+      }
+  });
+}
 }
