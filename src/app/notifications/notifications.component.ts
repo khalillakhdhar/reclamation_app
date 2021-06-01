@@ -7,6 +7,7 @@ import { UserService } from '../services/user.service';
 import { AngularFireStorage } from "@angular/fire/storage";
 import { map, finalize } from "rxjs/operators";
 import { Observable } from 'rxjs';
+import { MysearchPipe } from '../mysearch.pipe';
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
@@ -21,6 +22,7 @@ id:string;
 grade:string;
 selectedFile: File = null;
 fb = "product";
+query="";
 downloadURL: Observable<string>;
 
   constructor(private storage: AngularFireStorage,private userService:UserService,private reclamationService:ReclamationService, private toastr: ToastrService) {}
@@ -32,7 +34,6 @@ downloadURL: Observable<string>;
     this.id=localStorage.getItem("id");
     this.grade=localStorage.getItem("grade");
     this.read();
-    this.readreclamation();
   }
   onFileSelected(event) {
     var n = Date.now();
@@ -60,9 +61,9 @@ downloadURL: Observable<string>;
       });
   }
 
-  readreclamation()
+  readresolue()
   {
-    this.reclamationService.read_Reclamations().subscribe(data => {
+    this.reclamationService.read_resolu().subscribe(data => {
   
       this.reclamations = data.map(e => {
         return {
@@ -81,7 +82,32 @@ downloadURL: Observable<string>;
     
         };
       });
-      console.log("reclamations",this.reclamations);
+      console.log("resolue",this.reclamations);
+
+  });
+}
+  readreattente()
+  {
+    this.reclamationService.read_attente().subscribe(data => {
+  
+      this.reclamations = data.map(e => {
+        return {
+         id: e.payload.doc.id,
+    
+         date_heure: e.payload.doc.data()["date_heure"],
+         photo: e.payload.doc.data()["photo"],
+         message: e.payload.doc.data()["message"],
+         localisation: e.payload.doc.data()["localisation"],
+         etat: e.payload.doc.data()["etat"],
+         type: e.payload.doc.data()["type"],
+         user: e.payload.doc.data()["user"],
+         userid: e.payload.doc.data()["userid"],
+    
+    
+    
+        };
+      });
+      console.log("attente",this.reclamations);
 
   });
 }
@@ -134,6 +160,16 @@ downloadURL: Observable<string>;
     let rec=Object.assign({},this.reclamation);
     this.reclamationService.create_NewReclamation(rec);
 alert("reclamation ajouté");
+  }
+  changement(valeur)
+  {
+this.query=valeur;
+this.readreattente();
+  }
+  changementr(valeur)
+  {
+this.query=valeur;
+this.readresolue();
   }
   update(re)
   {

@@ -18,6 +18,12 @@ export class ReclamationService {
   read_Reclamations() {
     return this.firestore.collection('Reclamations').snapshotChanges();
   }
+  read_attente() {
+    return this.firestore.collection('Reclamations', (ref) => ref.where('etat', '==', 'resolu')).snapshotChanges();
+  }
+  read_resolu() {
+    return this.firestore.collection('Reclamations', (ref) => ref.where("etat", "==", 'attente')).snapshotChanges();
+  }
 
   update_Reclamation(recordID, record) {
     this.firestore.doc('Reclamations/' + recordID).update(record);

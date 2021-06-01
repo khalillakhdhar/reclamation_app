@@ -29,6 +29,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { ConnexionComponent } from './connexion/connexion.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { SearchPipe } from './search.pipe';
+import { MysearchPipe } from './mysearch.pipe';
 
 @NgModule({
   imports: [
@@ -51,7 +52,8 @@ import { SearchPipe } from './search.pipe';
     AdminLayoutComponent,
     ConnexionComponent,
     InscriptionComponent,
-    SearchPipe
+    SearchPipe,
+    MysearchPipe
 
   ],
   providers: [],

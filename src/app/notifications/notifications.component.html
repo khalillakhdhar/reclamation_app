@@ -5,9 +5,9 @@
   </div>
 </div>
 <div class="main-content">
-  <div class="row">
+  <div  class="row">
   
-    <div class="col-md-12">
+    <div *ngIf="grade!='admin'"   class="col-md-12">
       
       <div class="card">
         <div class="card-header">
@@ -45,11 +45,16 @@
     </div>
     </div>
     
-    <div class="col-md-12">
+    <div *ngIf="grade=='admin'" class="col-md-12">
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">Vos réclamations</h4>
+          <input type="button" (click)="changement('resolu')" class="btn btn-success" value="Résolu">
+          <input type="button" (click)="changementr('attente')"  class="btn btn-danger" value="en attente">
+          
         </div>
+        <input type="hidden" class="form-control" placeholder="Search" [(ngModel)]="query"   id="listSearch">
+
         <div class="card-body">
           <div class="alert alert-primary">
             <button type="button" aria-hidden="true" class="close">
@@ -58,7 +63,7 @@
           
               <b> Réclamation- </b> Déclaré de votre part {{id}}
           </div>
-          <div class="row">
+          <div class="row" *ngIf="query!=''">
            
             <div class="col-md-12">
               <div class="card">
