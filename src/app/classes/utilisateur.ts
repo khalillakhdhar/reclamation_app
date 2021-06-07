@@ -7,4 +7,5 @@ export class Utilisateur {
     cin:string;
     zone:string;
     grade:string;
+    question:string;
 }

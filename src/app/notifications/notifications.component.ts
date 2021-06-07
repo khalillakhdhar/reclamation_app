@@ -23,6 +23,7 @@ grade:string;
 selectedFile: File = null;
 fb = "product";
 query="";
+suggestion="";
 downloadURL: Observable<string>;
 
   constructor(private storage: AngularFireStorage,private userService:UserService,private reclamationService:ReclamationService, private toastr: ToastrService) {}
@@ -86,6 +87,10 @@ downloadURL: Observable<string>;
 
   });
 }
+choose()
+{
+  this.reclamation.message=this.suggestion;
+}
   readreattente()
   {
     this.reclamationService.read_attente().subscribe(data => {
@@ -126,7 +131,7 @@ downloadURL: Observable<string>;
        login: e.payload.doc.data()["login"],
        mdp: e.payload.doc.data()["mdp"],
        grade: e.payload.doc.data()["grade"],
-  
+       question: e.payload.doc.data()["question"]
   
   
       };
@@ -154,6 +159,8 @@ downloadURL: Observable<string>;
   {
     this.reclamation.photo=this.fb;
     this.reclamation.date_heure=Date();
+    if(this.grade=='ouvrier')
+    this.reclamation.etat="resolu";
     this.reclamation.etat="attente";
     this.reclamation.user=this.user.nom+" "+this.user.prenom;
     this.reclamation.userid=this.user.id;

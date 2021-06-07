@@ -34,6 +34,7 @@ query:string;
         grade: e.payload.doc.data()["grade"],
         zone: e.payload.doc.data()["zone"],
         cin: e.payload.doc.data()["cin"],
+        question: e.payload.doc.data()["question"],
 
   
       };

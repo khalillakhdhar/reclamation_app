@@ -36,7 +36,7 @@ export class UserProfileComponent implements OnInit {
        login: e.payload.doc.data()["login"],
        mdp: e.payload.doc.data()["mdp"],
        grade: e.payload.doc.data()["grade"],
-  
+       question: e.payload.doc.data()["question"]
   
   
       };

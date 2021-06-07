@@ -3,6 +3,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import * as Chartist from 'chartist';
 import { ToastrService } from 'ngx-toastr';
 import { Reclamation } from '../classes/reclamation';
+import { Utilisateur } from '../classes/utilisateur';
 import { ReclamationService } from '../services/reclamation.service';
 import { UserService } from '../services/user.service';
 
@@ -65,12 +66,13 @@ export class DashboardComponent implements OnInit {
       return "rgb(" + r + ", " + g + ", " + b + ")";
     }
   }
+  users:Utilisateur[];
   constructor(private storage: AngularFireStorage,private userService:UserService,private reclamationService:ReclamationService, private toastr: ToastrService) { }
   reclamation:Reclamation;
   reclamations:Reclamation[];
   ngOnInit() {
     this.readreclamation();
-
+this.read();
     this.chartColor = "#FFFFFF";
     this.canvas = document.getElementById("bigDashboardChart");
     this.ctx = this.canvas.getContext("2d");
@@ -468,5 +470,33 @@ export class DashboardComponent implements OnInit {
 
       }
   });
+}
+read()
+{
+this.userService.read_Users().subscribe(data => {
+
+  this.users = data.map(e => {
+    return {
+      id: e.payload.doc.id,
+
+      nom: e.payload.doc.data()["nom"],
+      prenom: e.payload.doc.data()["prenom"],
+      login: e.payload.doc.data()["login"],
+      mdp: e.payload.doc.data()["mdp"],
+      grade: e.payload.doc.data()["grade"],
+      zone: e.payload.doc.data()["zone"],
+      cin: e.payload.doc.data()["cin"],
+      question: e.payload.doc.data()["question"]
+
+    };
+  });
+
+
+  console.log("liste",this.users);
+
+});
+
+
+
 }
 }

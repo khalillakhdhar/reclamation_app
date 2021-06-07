@@ -6,6 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { ConnexionComponent } from './connexion/connexion.component';
 import { InscriptionComponent } from './inscription/inscription.component';
+import { MdpoubliComponent } from './mdpoubli/mdpoubli.component';
 
 const routes: Routes =[
   {
@@ -15,6 +16,7 @@ const routes: Routes =[
   }, 
 
   {path: 'connexion',component:ConnexionComponent},
+  {path: 'connexion/oubli',component:MdpoubliComponent},
   {path: 'connexion/inscription',component:InscriptionComponent},
   {
     path: '',

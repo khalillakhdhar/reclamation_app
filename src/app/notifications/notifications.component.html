@@ -11,7 +11,8 @@
       
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title">Réclamer un probléme</h4>
+          <span *ngIf="grade!='ouvrier'"><h4 class="card-title">Réclamer un probléme</h4></span>
+        <span *ngIf="grade=='ouvrier'">  <h4 class="card-title">Réclamer la réparation</h4></span>
         </div>
         <div class="card-body">
           <div class="alert alert-info">
@@ -20,6 +21,17 @@
          <div>
 
           <form>
+            <div class="mb-3">
+              <label for="reclamation" class="form-label">Proposition rapide  </label>
+              <select (change)="choose()" name="type" name="suggestion"  [(ngModel)]="suggestion" class="form-control">
+                <option value=""></option>
+                <option value="fuite gaz">fuite gaz</option>
+                <option value="fuite d’eau">fuite d’eau</option>
+                <option value="manque de courant">manque de courant</option>
+                <option value="coupure d'eau">coupure d'eau</option>
+                <option value="l’accumulation des eaux ">l’accumulation des eaux </option>
+              </select>
+            </div>
             <div class="mb-3">
               <label for="localite" class="form-label">Localité ou ville</label>
               <input type="text" name="locale" [(ngModel)]="reclamation.localisation" placeholder="choisissez un emplacement" class="form-control" id="localite" aria-describedby="emailHelp">
@@ -32,6 +44,7 @@
               <label for="message" class="form-label">message</label>
               <textarea name="mdg" [(ngModel)]="reclamation.message" placeholder="votre message ici" type="text" class="form-control" id="message"></textarea>
             </div>
+          
             <div class="mb-3">
               <label for="reclamation" class="form-label">Réclamer pour</label>
               <select name="type" name="type"  [(ngModel)]="reclamation.type" class="form-control"><option value="steg">STEG</option><option value="soned">SONED</option><option value="onas">ONAS</option></select>

@@ -30,6 +30,7 @@ import { ConnexionComponent } from './connexion/connexion.component';
 import { InscriptionComponent } from './inscription/inscription.component';
 import { SearchPipe } from './search.pipe';
 import { MysearchPipe } from './mysearch.pipe';
+import { MdpoubliComponent } from './mdpoubli/mdpoubli.component';
 
 @NgModule({
   imports: [
@@ -53,7 +54,8 @@ import { MysearchPipe } from './mysearch.pipe';
     ConnexionComponent,
     InscriptionComponent,
     SearchPipe,
-    MysearchPipe
+    MysearchPipe,
+    MdpoubliComponent
 
   ],
   providers: [],

@@ -30,6 +30,10 @@
               <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
               <input type="password" #mdp="ngModel" required [(ngModel)]="user.mdp" class="form-control" name="pass" id="exampleInputPassword1">
             </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label">Question de secours</label>
+              <input type="text" #qst="ngModel" required [(ngModel)]="user.question" class="form-control" name="qst" id="exampleInputPassword1">
+            </div>
             
            <span class="centered"> <button [disabled]="myForm.invalid"  type="submit" class="btn btn-primary">S'inscrire</button></span>
            <br>

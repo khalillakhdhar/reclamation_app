@@ -3,11 +3,12 @@ import { Utilisateur } from '../classes/utilisateur';
 import { UserService } from '../services/user.service';
 
 @Component({
-  selector: 'app-connexion',
-  templateUrl: './connexion.component.html',
-  styleUrls: ['./connexion.component.css']
+  selector: 'app-mdpoubli',
+  templateUrl: './mdpoubli.component.html',
+  styleUrls: ['./mdpoubli.component.css']
 })
-export class ConnexionComponent implements OnInit {
+export class MdpoubliComponent implements OnInit {
+
   user:Utilisateur;
   users:Utilisateur[];
   etat=false;
@@ -50,7 +51,7 @@ export class ConnexionComponent implements OnInit {
   {
     for(let us of this.users)
     {
-      if((us.login==this.user.login)&&(us.mdp==this.user.mdp))
+      if((us.question==this.user.question))
       {
         this.etat=true;
         localStorage.setItem("id",us.id);
